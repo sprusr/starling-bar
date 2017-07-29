@@ -1,0 +1,23 @@
+{
+  "name": "starling-bar",
+  "version": "0.1.0",
+  "description": "Display your Starling Bank account balance in the status bar",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/sprusr/starling-bar",
+  "keywords": [
+    "starling",
+    "bank"
+  ],
+  "author": "Scott Street <scott@spru.sr>",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "~1.6.2"
+  },
+  "dependencies": {
+    "starling-developer-sdk": "^0.1.6"
+  },
+  "productName": "StarlingBar"
+}
