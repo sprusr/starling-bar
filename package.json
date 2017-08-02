@@ -1,6 +1,6 @@
 {
   "name": "starling-bar",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Display your Starling Bank account balance in the status bar",
   "main": "main.js",
   "scripts": {
@@ -17,6 +17,9 @@
     "electron": "~1.6.2"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
+    "electron-json-storage": "^3.0.7",
+    "jquery": "^3.2.1",
     "starling-developer-sdk": "^0.1.6"
   },
   "productName": "StarlingBar"

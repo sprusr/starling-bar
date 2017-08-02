@@ -1,32 +1,12 @@
+html, body {
+  -webkit-app-region: drag;
+}
+
 body {
-  margin: 0 auto;
-  box-sizing: border-box;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
-  font-size: 14pt;
+  background-color: rgb(62, 48, 111);
+  padding-top: 40px;
 }
 
-#personal-auth-form {
-  width: 400px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-input {
-  border: 2px solid rgb(85, 20, 145);
-  border-radius: 4px;
-  border-collapse: collapse;
-  margin: 0;
-  padding: 0;
-  height: 30px;
-}
-
-input[type="text"] {
-  width: 100%;
-  background-color: #fff;
-}
-
-input[type="submit"] {
-  width: 20%;
-  background-color: rgb(85, 20, 145);
-  color: #fff;
+.container {
+  -webkit-app-region: no-drag;
 }

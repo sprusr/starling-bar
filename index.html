@@ -1,15 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Starling Bank Personal Auth</title>
-  <link rel="stylesheet" href="./index.css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./index.css">
 </head>
 <body>
-  <form id="personal-auth-form">
-    <input type="text" id="access-token-input" placeholder="Personal Access Token...">
-    <input type="submit">
-  </form>
+  <div class="app-region"></div>
+  <div class="container">
+    <div id="error"></div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Personal Auth</h1>
+      </div>
+      <div class="panel-body">
+        <p>You can get your personal auth token from the <a href="https://developer.starlingbank.com">Starling Bank developer portal</a>.</p>
+        <p>You'll be asked to create an account if you don't already have one, and tie it to your Starling account.</p>
+        <form id="personal-auth-form">
+          <div class="form-group">
+            <input type="text" id="access-token-input" placeholder="Token" class="form-control">
+          </div>
+          <input type="submit" class="form-control">
+        </form>
+      </div>
+    </div>
+  </div>
   <script>require('./index.js')</script>
 </body>
 </html>
