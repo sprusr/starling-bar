@@ -32,12 +32,13 @@ const loadConfig = () => {
 
     if (config.starling.accessToken) {
       starling = new Starling({accessToken: config.starling.accessToken})
-      starling.getBalance().catch(() => {
-        starling = null
-        loadPreAuthTray()
-      }).then(() => {
-        loadTray()
-      })
+
+      starling.account.getAccounts()
+        .then(loadTray)
+        .catch(() => {
+          starling = null;
+          loadPreAuthTray()
+        });
     } else {
       loadPreAuthTray()
     }
@@ -72,9 +73,14 @@ const updateTray = () => {
     return
   }
 
-  starling.getBalance().then(({data}) => {
+  starling.account.getAccounts()
+  .then(({ data: { accounts } }) => accounts[0].accountUid)
+  .then(accountUid => starling.account.getAccountBalance({ accountUid }))
+  .then(({ data: { effectiveBalance } }) => {
+    const effectiveBalanceText = `£${effectiveBalance.minorUnits / 100}`
+
     if (config.starling.displayInStatusbar) {
-      tray.setTitle(`£${data.effectiveBalance}`)
+      tray.setTitle(effectiveBalanceText)
     } else {
       tray.setTitle('')
     }
@@ -83,7 +89,7 @@ const updateTray = () => {
       {type: 'checkbox', label: 'Display in statusbar', click: setDisplayInStatusbar, checked: config.starling.displayInStatusbar},
       {type: 'separator'},
       {label: `Balance`, enabled: false},
-      {label: `  - £${data.effectiveBalance}`, enabled: false},
+      {label: `  - ${effectiveBalanceText}`, enabled: false},
       {type: 'separator'},
       {label: 'Log out', click: logOut},
       {label: 'Quit', role: 'quit'}
@@ -121,15 +127,18 @@ const doPersonalAuth = () => {
 
 ipcMain.on('personal-auth-token', (event, token) => {
   starling = new Starling({accessToken: token})
-  starling.getBalance().then(({data}) => {
-    config.starling.accessToken = token
-    storage.set('starling', config.starling, function(error) {
-      authWindow.hide()
-      loadTray()
+
+  starling.account.getAccounts()
+    .then(() => {
+      config.starling.accessToken = token
+      storage.set('starling', config.starling, (error) => {
+        authWindow.hide()
+        loadTray()
+      })
     })
-  }).catch((error) => {
-    event.sender.send('personal-auth-error', 'Invalid auth token')
-  })
+    .catch(() => {
+      event.sender.send('personal-auth-error', 'Invalid auth token')
+    });
 })
 
 const logOut = () => {
