@@ -19,7 +19,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "electron-json-storage": "^3.0.7",
-    "jquery": "^3.2.1",
+    "jquery": "^3.5.0",
     "starling-developer-sdk": "^0.1.6"
   },
   "productName": "StarlingBar"
